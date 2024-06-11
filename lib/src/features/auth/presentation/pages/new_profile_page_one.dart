@@ -6,15 +6,17 @@ import 'package:kumquat_app/src/core/components/eclipse_header.dart';
 import 'package:kumquat_app/src/core/helper/helper_functions.dart';
 import 'package:kumquat_app/src/core/helper/space.dart';
 import 'package:kumquat_app/src/core/routes/app_router.gr.dart';
+import 'package:kumquat_app/src/features/auth/blocs/auth/bloc.dart';
 
 import '../../../../core/components/custom_dropdown_button.dart';
 import '../../../../core/constants/profile_creation_lists.dart';
+import '../../../../core/helper/focus_helper.dart';
 import '../widgets/new_profile_dropdown_widget.dart';
 
 @RoutePage<void>()
 class NewProfilePageOne extends StatefulWidget {
-  const NewProfilePageOne({super.key});
-
+  const NewProfilePageOne({super.key, required this.bloc});
+  final AuthBloc bloc;
   @override
   State<NewProfilePageOne> createState() => _NewProfilePageOneState();
 }
@@ -94,8 +96,14 @@ class _NewProfilePageOneState extends State<NewProfilePageOne> {
                   ),
                   CustomAppButton(titleText: 'Done',
                       onTap: () {
-                    if(formKey.currentState!.validate()){
-                      context.router.push(const NewProfileRouteTwo());
+                        getFocus(context);
+                        if(formKey.currentState!.validate()){
+                      widget.bloc.profession = professionSelected! ;
+                      widget.bloc.category1 = category1SelectedVal! ;
+                      widget.bloc.category2 = category2SelectedVal! ;
+                      widget.bloc.category3 = category3SelectedVal! ;
+
+                      context.router.push( NewProfileRouteTwo(bloc: widget.bloc));
                     }else{
                       showSnackBar(context, 'Must Select fields', 'error');
                     }

@@ -1,96 +1,94 @@
-import 'dart:io';
 
-import 'package:dio/dio.dart';
 
-mixin Http {
-  handleDioException(DioError error) {
-    RequestOptions request = error.requestOptions;
-    String method = request.method;
-    String url = request.path.toString();
-    int? code = error.response?.statusCode;
-    var requestBody = request.data;
-    if (error.response == null) throw NoNetworkError();
-
-    dynamic responseBody = error.response?.data;
-    switch (error.type) {
-      case DioErrorType.connectTimeout:
-        throw NoNetworkError();
-      case DioErrorType.sendTimeout:
-        throw NetworkError();
-      case DioErrorType.receiveTimeout:
-        throw NetworkError();
-      case DioErrorType.response:
-        _handleErrorStatus(
-            code: code,
-            method: method,
-            url: url,
-            requestBody: requestBody,
-            responseBody: responseBody);
-        break;
-      case DioErrorType.cancel:
-        throw NetworkError();
-      case DioErrorType.other:
-        if (error.error is SocketException) {
-          throw NetworkError();
-        } else {
-          throw UnknownException();
-        }
-    }
-  }
-
-  _handleErrorStatus(
-      {int? code,
-        required String method,
-        required String url,
-        dynamic requestBody,
-        dynamic responseBody}) {
-    if (code == 204) {
-      return null;
-    } else if (code == 400) {
-      throw BadRequestException(method, code!, requestBody, responseBody);
-    } else if (code == 401) {
-      throw UnauthorizedException(method, code!);
-    } else if (code == 403) {
-      throw ForbiddenException(method, code!);
-    } else if (code == 404) {
-      throw NotFoundException(method, code!, requestBody, responseBody);
-    } else if (code == 422) {
-      throw UnProcessableException(method, code!, requestBody, responseBody);
-    } else if (code != null && code > 400 && code < 500) {
-      throw ClientError(
-          method: method,
-          statusCode: code,
-          requestBody: requestBody,
-          responseBody: responseBody);
-    } else if (code != null && code >= 500 && code <= 599) {
-      throw ServerError(
-          method: method,
-          statusCode: code,
-          requestBody: requestBody.toString(),
-          responseBody: responseBody.toString());
-    } else {
-      throw HttpStatusException(
-        method,
-        code,
-        statusCode: code,
-        requestBody: requestBody,
-        responseBody: responseBody,
-      );
-    }
-  }
-
-  Future<T> safelyRun<T>(Future<T> Function() method) async {
-    try {
-      return await method();
-    } on DioError catch (error) {
-      // print('err${error}');
-      throw handleDioException(error);
-    } catch (error) {
-      // print('catch${error}');
-      throw ServerError();
-    }
-  }
-}
+// mixin Http {
+//   handleDioException(DioError error) {
+//     RequestOptions request = error.requestOptions;
+//     String method = request.method;
+//     String url = request.path.toString();
+//     int? code = error.response?.statusCode;
+//     var requestBody = request.data;
+//     if (error.response == null) throw NoNetworkError();
+//
+//     dynamic responseBody = error.response?.data;
+//     switch (error.type) {
+//       case DioErrorType.connectTimeout:
+//         throw NoNetworkError();
+//       case DioErrorType.sendTimeout:
+//         throw NetworkError();
+//       case DioErrorType.receiveTimeout:
+//         throw NetworkError();
+//       case DioErrorType.response:
+//         _handleErrorStatus(
+//             code: code,
+//             method: method,
+//             url: url,
+//             requestBody: requestBody,
+//             responseBody: responseBody);
+//         break;
+//       case DioErrorType.cancel:
+//         throw NetworkError();
+//       case DioErrorType.other:
+//         if (error.error is SocketException) {
+//           throw NetworkError();
+//         } else {
+//           throw UnknownException();
+//         }
+//     }
+//   }
+//
+//   _handleErrorStatus(
+//       {int? code,
+//         required String method,
+//         required String url,
+//         dynamic requestBody,
+//         dynamic responseBody}) {
+//     if (code == 204) {
+//       return null;
+//     } else if (code == 400) {
+//       throw BadRequestException(method, code!, requestBody, responseBody);
+//     } else if (code == 401) {
+//       throw UnauthorizedException(method, code!);
+//     } else if (code == 403) {
+//       throw ForbiddenException(method, code!);
+//     } else if (code == 404) {
+//       throw NotFoundException(method, code!, requestBody, responseBody);
+//     } else if (code == 422) {
+//       throw UnProcessableException(method, code!, requestBody, responseBody);
+//     } else if (code != null && code > 400 && code < 500) {
+//       throw ClientError(
+//           method: method,
+//           statusCode: code,
+//           requestBody: requestBody,
+//           responseBody: responseBody);
+//     } else if (code != null && code >= 500 && code <= 599) {
+//       throw ServerError(
+//           method: method,
+//           statusCode: code,
+//           requestBody: requestBody.toString(),
+//           responseBody: responseBody.toString());
+//     } else {
+//       throw HttpStatusException(
+//         method,
+//         code,
+//         statusCode: code,
+//         requestBody: requestBody,
+//         responseBody: responseBody,
+//       );
+//     }
+//   }
+//
+//   Future<T> safelyRun<T>(Future<T> Function() method) async {
+//     try {
+//       return await method();
+//     } on DioError catch (error) {
+//       // print('err${error}');
+//       throw handleDioException(error);
+//     } catch (error) {
+//       // print('catch${error}');
+//       throw ServerError();
+//     }
+//   }
+// }
 
 class InvalidRecordException implements Exception {}
 

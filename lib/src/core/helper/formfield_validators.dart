@@ -11,6 +11,20 @@ class FormfieldValidators{
     }
   };
 
+  static FormFieldValidator<String>? get emailValidator =>(String? value){
+    String input = value!.trim();
+    String? required = isEmpty!(value);
+    RegExp exp = RegExp(
+      r"^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$",
+      caseSensitive: false,
+      multiLine: false,
+    );
+    if(required != null) return required ;
+    if(exp.hasMatch(input)) return null;
+    if(input.isNotEmpty || !exp.hasMatch(input)) return 'Email address is not valid';
+    return null;
+  };
+
   static FormFieldValidator<String>? get passwordValidator =>(String? value) {
     String input = value!.trim();
     if (input.isEmpty) return 'This field is required';

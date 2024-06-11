@@ -1,9 +1,11 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kumquat_app/src/core/extensions/typography_extensions.dart';
 import 'package:kumquat_app/src/core/routes/app_router.gr.dart';
-
+import 'package:kumquat_app/src/features/auth/blocs/auth/bloc.dart';
+import 'package:kumquat_app/src/features/auth/blocs/auth/event.dart';
 import '../helper/app_colors.dart';
 import '../helper/asset_helper.dart';
 import '../theme/app_styles.dart';
@@ -45,7 +47,10 @@ class CustomAppbar extends StatelessWidget implements PreferredSizeWidget {
                   color: AppColors.white,
                 )),
         IconButton(
-            onPressed: () {},
+            onPressed: () {
+              context.read<AuthBloc>().add(DoLogout());
+              context.router.replaceAll([const WelcomeRoute()]);
+            },
             visualDensity:
                 const VisualDensity(horizontal: -4.0, vertical: -4.0),
             icon: SvgPicture.asset(

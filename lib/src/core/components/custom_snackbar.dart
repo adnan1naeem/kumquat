@@ -14,7 +14,7 @@ class CustomSnackbar{
     );
   }
 
-  static SnackBar normal (String message){
+  static SnackBar success (String message){
     return  SnackBar(
       backgroundColor: AppColors.primaryColor.withOpacity(0.8),
       content: Text(message, style: AppStyles.text16Normal.white,),
