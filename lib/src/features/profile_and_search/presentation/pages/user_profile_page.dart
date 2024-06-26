@@ -14,6 +14,7 @@ import 'package:kumquat_app/src/features/profile_and_search/presentation/widgets
 import 'package:kumquat_app/src/features/profile_and_search/presentation/widgets/review_card.dart';
 
 import '../../../../core/helper/asset_helper.dart';
+import '../../../../core/routes/app_router.gr.dart';
 import '../widgets/profile_contact_widget.dart';
 import '../widgets/socials_bar_widget.dart';
 import '../widgets/user_profile_avatar.dart';
@@ -55,7 +56,8 @@ class UserProfilePage extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const ProfileContactWidget(
+                       ProfileContactWidget(
+                        onPressed: (){},
                         title: 'Message',
                         rate: 0,
                         icon: AssetHelper.messageIcon,
@@ -63,14 +65,20 @@ class UserProfilePage extends StatelessWidget {
                         hideRate: true,
                       ),
                       horizontalSpace(20),
-                      const ProfileContactWidget(
+                       ProfileContactWidget(
+                        onPressed: (){
+                          context.router.push(const VoiceCallRoute());
+                        },
                         title: 'Phone',
                         rate: 25,
                         padding: 12,
                         icon: AssetHelper.phoneIcon,
                       ),
                       horizontalSpace(20),
-                      const ProfileContactWidget(
+                       ProfileContactWidget(
+                        onPressed: (){
+                          context.router.push(const VideoCallRoute());
+                        },
                         title: 'Video',
                         rate: 25,
                         icon: AssetHelper.videoIcon,
@@ -108,7 +116,7 @@ class UserProfilePage extends StatelessWidget {
                                  ],),
                                verticalSpace(20),
                                headingText('Reviews'),
-                               Container(
+                               SizedBox(
                                  height: 250,
                                  child: ListView.builder(
                                    itemCount: 5,

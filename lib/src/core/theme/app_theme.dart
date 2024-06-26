@@ -14,6 +14,9 @@ class AppTheme{
         selectionColor: AppColors.primaryColor,
         selectionHandleColor: AppColors.primaryColor
     ),
-
+    appBarTheme: const AppBarTheme(
+      iconTheme:  IconThemeData(color: AppColors.white),
+      backgroundColor: AppColors.primaryColor,
+    )
   );
 }

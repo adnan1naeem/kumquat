@@ -14,17 +14,21 @@ class ProfileContactWidget extends StatelessWidget {
         required this.rate,
         required this.icon,
         this.hideRate = false,
-        this.padding = 8});
+        this.padding = 8,
+        required this.onPressed
+      });
   final String title;
   final double rate;
   final String icon;
   final bool hideRate;
   final double padding;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         AppButtonRounded(
+          tap: onPressed,
           icon: SvgPicture.asset(icon),
           padding: padding,
         ),

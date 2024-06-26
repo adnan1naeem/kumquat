@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "559064509571",
+    "project_id": "kamquatapp-541e3",
+    "storage_bucket": "kamquatapp-541e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:559064509571:android:5c0be00cef80ddbdb93fb6",
+        "android_client_info": {
+          "package_name": "com.kumquat.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0dst4Xl2dUeC6lZLdaKrfBgpD3fTi-c0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:kumquat_app/src/core/helper/asset_helper.dart';
-import 'package:kumquat_app/src/core/helper/space.dart';
 
 import '../../../../core/components/app_button_rounded.dart';
 import '../../../../core/helper/app_colors.dart';
@@ -15,6 +14,7 @@ class SocialsBarWidget extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         AppButtonRounded(
+          tap: (){},
           icon: SvgPicture.asset(
             AssetHelper.linkedinIcon,
             colorFilter:
@@ -23,6 +23,7 @@ class SocialsBarWidget extends StatelessWidget {
           height: 40,
         ),
         AppButtonRounded(
+          tap: (){},
           icon: SvgPicture.asset(
             AssetHelper.fbIcon,
             colorFilter:
@@ -31,6 +32,7 @@ class SocialsBarWidget extends StatelessWidget {
           height: 40,
         ),
         AppButtonRounded(
+          tap: (){},
           icon: SvgPicture.asset(
             AssetHelper.instagramIcon,
             colorFilter:
@@ -39,6 +41,7 @@ class SocialsBarWidget extends StatelessWidget {
           height: 40,
         ),
         AppButtonRounded(
+          tap: (){},
           icon: SvgPicture.asset(
             AssetHelper.youtubeIcon,
             colorFilter:

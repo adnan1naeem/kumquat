@@ -1,10 +1,10 @@
 import 'package:equatable/equatable.dart';
 import 'package:kumquat_app/src/data/models/json_doc.dart';
 
-import '../../domain/services/data_service.dart';
+import '../../domain/services/firebase_service.dart';
 
 class BaseModel extends Equatable {
-  static DataService adapter = DataService();
+  static FirebaseService adapter = FirebaseService();
 
   const BaseModel({required this.jsonDoc});
 

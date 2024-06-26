@@ -14,7 +14,8 @@ class CustomAppButton extends StatelessWidget {
     this.padding = EdgeInsets.zero,
     this.child,
     this.radius = 22,
-    this.isOutlined = false
+    this.isOutlined = false,
+    this.isLoading = false,
   });
   final double height;
   final double width;
@@ -24,6 +25,7 @@ class CustomAppButton extends StatelessWidget {
   final Widget? child;
   final double radius;
   final bool isOutlined;
+  final bool isLoading;
 
   @override
   Widget build(BuildContext context) {
@@ -45,8 +47,10 @@ class CustomAppButton extends StatelessWidget {
               ))
           ),
           
-          child: child ??
-          Text(
+          child: isLoading ?
+              const CircularProgressIndicator(color: AppColors.primaryColor,strokeWidth: 2.0,)
+              :
+          child ?? Text(
             titleText!,
             style: isOutlined ? AppStyles.text14Bold.secondaryColor : AppStyles.text14Bold.white,
           )),
