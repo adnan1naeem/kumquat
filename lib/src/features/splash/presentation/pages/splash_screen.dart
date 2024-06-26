@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kumquat_app/src/core/components/app_scaffold.dart';
@@ -16,8 +17,8 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<SessionBloc,SessionState>(
-        listener: (context, state){
+    return BlocListener<SessionBloc, SessionState>(
+        listener: (context, state) {
           if(state is SessionAuthenticated){
             context.router.maybePop();
             context.router.replace(const FindUsersRoute());
@@ -27,24 +28,24 @@ class SplashPage extends StatelessWidget {
             context.router.replace(const WelcomeRoute());
           }
         },
-       child: AppScaffold(
-            body: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    const EclipseHeader(),
-                    verticalSpace(100),
-                    const Padding(
-                      padding:  EdgeInsets.symmetric(vertical: 20.0, horizontal: 30),
-                      child: Column(
-                        children: [
-                           WelcomeWidget(),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ))
+        child: AppScaffold(
+             body: SingleChildScrollView(
+                 child: Column(
+                   children: [
+                     const EclipseHeader(),
+                     verticalSpace(100),
+                     const Padding(
+                       padding:  EdgeInsets.symmetric(vertical: 20.0, horizontal: 30),
+                       child: Column(
+                         children: [
+                            WelcomeWidget(),
+                         ],
+                       ),
+                     )
+                   ],
+                 ),
+               ))
 
-    );
+        );
   }
 }

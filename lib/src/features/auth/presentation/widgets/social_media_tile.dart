@@ -31,6 +31,7 @@ class _SocialMediaTileState extends State<SocialMediaTile> {
       child: Row(
         children: [
           AppButtonRounded(
+            tap: (){},
             icon: SvgPicture.asset(
               widget.imagePath,
               colorFilter: const ColorFilter.mode(

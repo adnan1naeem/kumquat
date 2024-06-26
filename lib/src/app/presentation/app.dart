@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:kumquat_app/src/core/providers/app_bloc_provider.dart';
 import 'package:kumquat_app/src/core/theme/app_theme.dart';
 import 'package:kumquat_app/src/features/auth/blocs/session/bloc.dart';
 
+import '../../core/helper/app_colors.dart';
 import '../../core/routes/app_router.dart';
 
 
@@ -21,6 +23,9 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
+      statusBarColor: AppColors.primaryColor, //or set color with: Color(0xFF0000FF)
+    ));
     return  MultiBlocProvider(
       providers: AppBlocProvider(widget.sessionBloc).getProviders,
       child: MaterialApp.router(

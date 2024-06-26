@@ -26,7 +26,9 @@ class AppRouter extends $AppRouter {
     AutoRoute(page: SettingsRoute.page),
     AutoRoute(page: UserProfileRoute.page),
     AutoRoute(page: AddFundsRoute.page),
-
+    AutoRoute(page: VideoCallRoute.page),
+    AutoRoute(page: VoiceCallRoute.page),
+    AutoRoute(page: InboxRoute.page),
   ];
 
 }
